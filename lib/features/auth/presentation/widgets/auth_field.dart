@@ -78,7 +78,7 @@ class AuthField extends StatelessWidget {
       obscureText: isPassword,
       cursorWidth: 1.6.w,
       scrollPadding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom + 1000),
+          bottom: MediaQuery.of(context).viewInsets.bottom + 600),
       // expands: true,
       keyboardType: textInputType,
       maxLines: maxLines,
@@ -112,7 +112,7 @@ class AuthField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius.r)),
-          borderSide: const BorderSide(color: TColors.primary, width: 1.0),
+          borderSide: const BorderSide(color: Color(0XFFCED4F7), width: 1.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),

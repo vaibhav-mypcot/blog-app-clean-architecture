@@ -1,12 +1,17 @@
+import 'package:blog_app/core/routes/app_route_config.dart';
+import 'package:blog_app/core/routes/app_route_constants.dart';
 import 'package:blog_app/core/utils/constants/colors.dart';
 import 'package:blog_app/core/utils/constants/image_strings.dart';
 import 'package:blog_app/core/utils/constants/validation_mixin.dart';
+import 'package:blog_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -16,7 +21,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> with ValidationsMixin {
-  final signUpKey = GlobalKey<FormState>();
+  static final signInKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -69,7 +74,7 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Form(
-                    key: signUpKey,
+                    key: signInKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -87,9 +92,6 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                         SizedBox(height: 6.h),
                         AuthField(
                           controller: emailController,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(3)
-                          ],
                           textAlignVertical: TextAlignVertical.bottom,
                           hintText: "Enter your email",
                           suffixIcon: Container(
@@ -125,9 +127,6 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                         SizedBox(height: 6.h),
                         AuthField(
                           controller: passwordController,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(3)
-                          ],
                           textAlignVertical: TextAlignVertical.bottom,
                           hintText: "Enter your password",
                           suffixIcon: Container(
@@ -202,12 +201,13 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
 
                 //-- create ac button
 
-                const CustomButton(
+                CustomButton(
                   label: "Log in",
                   icons: Icon(
                     Icons.arrow_forward,
                     color: Colors.white,
                   ),
+                  onPressed: () {},
                 ),
 
                 SizedBox(height: 8.h),
@@ -221,14 +221,18 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                     ),
-                    children: const [
+                    children: [
                       TextSpan(
-                        text: "Sign up now",
-                        style: TextStyle(
-                          color: Color(0XFF2F66ED),
-                          fontWeight: FontWeight.w600,
-                        ), // Change the color of this text
-                      ),
+                          text: "Sign up now",
+                          style: TextStyle(
+                            color: Color(0XFF2F66ED),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              GoRouter.of(context).pushNamed(
+                                  MyAppRouteConstants.signUpRouteName);
+                            }),
                     ],
                   ),
                   textAlign: TextAlign.center,
