@@ -50,4 +50,14 @@ class TColors {
   static const Color lightGray = Color(0xFFBBBBBB);
   static const Color white = Color(0xFFFFFFFF);
   static const Color greyBg = Color(0XFF1F2C34);
+
+  // Custom Snackbar Colors
+  static const Color failedBackgroundColor = Color(0xFFC72C41);
+  static const Color failedAssetsColor = Color(0xFF801336);
+
+  static const Color successBackgroundColor = Color(0xFF346E45);
+  static const Color successAssetsColor = Color(0xFF214D34);
+
+  static const Color warningBackgroundColor = Color(0xFFE09147);
+  static const Color warningAssetsColor = Color(0xFFBD5D30);
 }
