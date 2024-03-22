@@ -1,10 +1,18 @@
+import 'package:blog_app/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:blog_app/core/secrets/spp_secrets.dart';
 import 'package:blog_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:blog_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_repository.dart';
+import 'package:blog_app/features/auth/domain/usecases/current_user.dart';
 import 'package:blog_app/features/auth/domain/usecases/user_sign_in.dart';
 import 'package:blog_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:blog_app/features/blog/data/datasources/blog_remote_data_source.dart';
+import 'package:blog_app/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
+import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
+import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
+import 'package:blog_app/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,6 +20,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initBlog();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnonKey,
@@ -26,8 +35,12 @@ Future<void> initDependencies() async {
   // type throughout the lifetime of the application this means that every time your request an instance of a type
   // you'll get the same instance as word singleTone suggest
   serviceLocator.registerLazySingleton(() => supabase.client);
+
+  // core
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
+//-- register data source
 void _initAuth() {
   serviceLocator.registerFactory<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(
@@ -39,6 +52,8 @@ void _initAuth() {
       serviceLocator(),
     ),
   );
+
+  //-- Use cases
 
   serviceLocator.registerFactory(
     () => UserSignUp(
@@ -52,10 +67,58 @@ void _initAuth() {
     ),
   );
 
+  serviceLocator.registerFactory(
+    () => CurrentUser(
+      serviceLocator(),
+    ),
+  );
+
+  // Bloc
   serviceLocator.registerLazySingleton(
     () => AuthBloc(
       userSignUp: serviceLocator(),
       userSignIn: serviceLocator(),
+      currentUser: serviceLocator(),
+      appUserCubit: serviceLocator(),
     ),
   );
+}
+
+void _initBlog() {
+  // Data source
+  serviceLocator
+    ..registerFactory<BlogRemoteDataSource>(
+      () => BlogRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
+    )
+
+    // Repository
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
+
+    // Use cases
+    ..registerFactory(
+      () => UploadBlog(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetAllBlogs(
+        serviceLocator(),
+      ),
+    )
+
+    // --
+
+    // Bloc
+    ..registerLazySingleton(
+      () => BlogBloc(
+        uploadBlog: serviceLocator(),
+        getAllBlogs: serviceLocator(),
+      ),
+    );
 }

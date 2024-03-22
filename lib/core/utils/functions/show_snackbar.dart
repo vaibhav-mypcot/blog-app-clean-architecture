@@ -15,7 +15,7 @@ void showSnackBar(BuildContext context, String title, String subTitle,
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      duration: const Duration(seconds: 15),
+      duration: const Duration(seconds: 5),
     ),
   );
 }

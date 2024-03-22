@@ -5,8 +5,9 @@ class Loader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: const Center(child: CircularProgressIndicator()),
     );
   }
 }

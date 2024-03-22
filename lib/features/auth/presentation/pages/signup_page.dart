@@ -1,11 +1,13 @@
 import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/routes/app_route_constants.dart';
+import 'package:blog_app/core/routes/app_router.dart';
 import 'package:blog_app/core/utils/constants/colors.dart';
 import 'package:blog_app/core/utils/constants/image_strings.dart';
 import 'package:blog_app/core/utils/constants/validation_mixin.dart';
 import 'package:blog_app/core/utils/functions/show_snackbar.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
+import 'package:blog_app/features/auth/presentation/pages/signin_pag.dart';
+import 'package:blog_app/core/common/widgets/custom_textfield.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
-  static final signUpKey = GlobalKey<FormState>();
+  final signUpKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -115,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
                             ),
                           ),
                           SizedBox(height: 6.h),
-                          AuthField(
+                          CustomTextField(
                             controller: nameController,
                             textAlignVertical: TextAlignVertical.bottom,
                             hintText: "Enter your name",
@@ -150,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
                             ),
                           ),
                           SizedBox(height: 6.h),
-                          AuthField(
+                          CustomTextField(
                             controller: emailController,
                             textAlignVertical: TextAlignVertical.bottom,
                             hintText: "Enter your email",
@@ -185,7 +187,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
                             ),
                           ),
                           SizedBox(height: 6.h),
-                          AuthField(
+                          CustomTextField(
                             controller: passwordController,
                             textAlignVertical: TextAlignVertical.bottom,
                             hintText: "Enter your password",
@@ -280,7 +282,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
                     },
                   ),
 
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 18.h),
 
                   //--
 
@@ -301,17 +303,26 @@ class _SignUpPageState extends State<SignUpPage> with ValidationsMixin {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const SignUpPage()));
+                                  builder: (context) => const SignInPage()));
                               // GoRouter.of(context)
                               //     .goNamed(MyAppRouteConstants.signInRouteName);
+
                               // GoRouter.of(context).pushNamed(
                               //     MyAppRouteConstants.signInRouteName);
+
+                              // AppRouter.returnRouter()
+                              //     .go(MyAppRouteConstants.signInRouteName);
+
+                              // context
+                              //     .goNamed(MyAppRouteConstants.signInRouteName);
                             },
                         ),
                       ],
                     ),
                     textAlign: TextAlign.center,
                   ),
+
+                  SizedBox(height: 18.h),
                 ],
               ),
             );

@@ -42,4 +42,16 @@ mixin ValidationsMixin {
       }
     }
   }
+
+  String? validatedBlogTitle(String? value) {
+    if (value == null || value.isEmpty || value.length <= 3) {
+      return 'Please enter valid title';
+    }
+  }
+
+  String? validatedBlogContent(String? value) {
+    if (value == null || value.isEmpty || value.length <= 3) {
+      return 'Please enter valid title';
+    }
+  }
 }

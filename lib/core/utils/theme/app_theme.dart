@@ -1,9 +1,9 @@
 import 'package:blog_app/core/utils/constants/colors.dart';
 import 'package:blog_app/core/utils/theme/custom_themes/appbar_theme.dart';
+import 'package:blog_app/core/utils/theme/custom_themes/chep_theme.dart';
 import 'package:blog_app/core/utils/theme/custom_themes/tabbar_theme.dart';
 import 'package:blog_app/core/utils/theme/custom_themes/text_theme.dart';
 import 'package:flutter/material.dart';
-
 
 class TAppTheme {
   TAppTheme._();
@@ -21,6 +21,7 @@ class TAppTheme {
       selectionHandleColor: TColors.primary,
     ),
     tabBarTheme: TTabBarTheme.lightTabBarTheme,
+    chipTheme: TChipThemeData.lightAppbarTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -36,5 +37,6 @@ class TAppTheme {
       selectionHandleColor: TColors.primary,
     ),
     tabBarTheme: TTabBarTheme.darkTabBarTheme,
+    chipTheme: TChipThemeData.darkAppbarTheme,
   );
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AuthField extends StatelessWidget {
-  const AuthField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     this.controller,
     this.onChanged,

@@ -5,24 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
-  GoRouter router = GoRouter(
-    initialLocation: MyAppRouteConstants.signInRouteName,
-    routes: [
-      GoRoute(
-        name: MyAppRouteConstants.signInRouteName,
-        path: '/',
-        builder: (context, state) {
-          // Return the widget for the sign-in page
-          return const SignInPage();
-        },
-      ),
-      GoRoute(
-        name: MyAppRouteConstants.signUpRouteName,
-        path: '/signUpPage',
-        builder: (context, state) {
-          return const SignUpPage();
-        },
-      ),
-    ],
-  );
+  static GoRouter returnRouter() {
+    return GoRouter(
+      initialLocation: '/',
+      routes: [
+        GoRoute(
+          name: MyAppRouteConstants.signInRouteName,
+          path: '/',
+          pageBuilder: (context, state) {
+            return const MaterialPage(child: SignInPage());
+          },
+        ),
+        GoRoute(
+          name: MyAppRouteConstants.signUpRouteName,
+          path: '/signUpPage',
+          pageBuilder: (context, state) {
+            return const MaterialPage(child: SignUpPage());
+          },
+        ),
+      ],
+    );
+  }
 }
