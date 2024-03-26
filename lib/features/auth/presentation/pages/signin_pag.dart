@@ -9,6 +9,7 @@ import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog_app/core/common/widgets/custom_textfield.dart';
 import 'package:blog_app/features/auth/presentation/widgets/custom_button.dart';
+import 'package:blog_app/features/blog/presentation/pages/blog_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,13 +50,13 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
               return showSnackBar(
                 context,
                 "Oh snap!",
-                "Something went wrong! Please try again",
+                state.message,
                 TColors.failedBackgroundColor,
                 TColors.failedAssetsColor,
                 TImages.failure,
               );
             } else if (state is AuthSuccess) {
-              return showSnackBar(
+              showSnackBar(
                 context,
                 "Congratulations!",
                 "You have successfully become a member. Welcome to our community!",
@@ -63,11 +64,20 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                 TColors.successAssetsColor,
                 TImages.success,
               );
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => BlogPage()),
+                (route) => false, // Remove all routes
+              );
             }
           }, builder: (context, state) {
             if (state is AuthLoading) {
               return const Loader();
             }
+            bool isPasswordVisible = state is PasswordVisibilityChanged
+                ? state.isPasswordVisible
+                : true;
             return SizedBox(
               width: double.infinity,
               child: Column(
@@ -119,6 +129,7 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                           ),
                           SizedBox(height: 6.h),
                           CustomTextField(
+                            maxLines: 1,
                             controller: userEmailController,
                             textAlignVertical: TextAlignVertical.bottom,
                             hintText: "Enter your email",
@@ -154,15 +165,25 @@ class _SignInPageState extends State<SignInPage> with ValidationsMixin {
                           ),
                           SizedBox(height: 6.h),
                           CustomTextField(
+                            isPassword: isPasswordVisible,
+                            maxLines: 1,
                             controller: userPasswordController,
                             textAlignVertical: TextAlignVertical.bottom,
                             hintText: "Enter your password",
-                            suffixIcon: Container(
-                              width: double.minPositive,
-                              alignment: Alignment.centerLeft,
-                              child: Icon(
-                                Icons.visibility_outlined,
-                                size: 20.h,
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                BlocProvider.of<AuthBloc>(context)
+                                    .add(TogglePasswordVisibilityEvent());
+                              },
+                              child: Container(
+                                width: double.minPositive,
+                                alignment: Alignment.centerLeft,
+                                child: Icon(
+                                  isPasswordVisible
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  size: 20.h,
+                                ),
                               ),
                             ),
                             hintStyle: TextStyle(

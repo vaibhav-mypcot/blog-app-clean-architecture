@@ -24,6 +24,8 @@ class _BlogPageState extends State<BlogPage> {
     context.read<BlogBloc>().add(BlogFetchAllBlogs());
   }
 
+  List<bool> selectedStates = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,11 +69,24 @@ class _BlogPageState extends State<BlogPage> {
               itemCount: state.blogs.length,
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
-
-                return Padding(
+                bool isSelected = selectedStates.length > index
+                    ? selectedStates[index]
+                    : false;
+                return Container(
+                  color: Colors.grey.withOpacity(0.2),
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.h, vertical: 8.w),
-                  child: BlogCart(blog: blog),
+                  child: GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          if (selectedStates.length <= index) {
+                            selectedStates.add(true);
+                          } else {
+                            selectedStates[index] = true;
+                          }
+                        });
+                      },
+                      child: BlogCart(blog: blog)),
                 );
               },
             );

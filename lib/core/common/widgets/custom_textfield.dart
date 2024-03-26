@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     this.errorStyle,
     this.errorMaxLines,
-    this.isPassword = false,
+    this.isPassword,
     this.prefixIcon,
     this.suffixIcon,
     this.onEditingComplete,
@@ -47,7 +47,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextStyle? errorStyle;
   final int? errorMaxLines;
-  final bool isPassword;
+  final bool? isPassword;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType textInputType;
@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       onFieldSubmitted: onFieldSubmitted,
       style: style,
-      obscureText: isPassword,
+      obscureText: isPassword ?? false,
       cursorWidth: 1.6.w,
       scrollPadding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom + 600),

@@ -13,6 +13,8 @@ abstract interface class BlogRemoteDataSource {
   });
 
   Future<List<BlogModel>> getAllBlogs();
+
+
 }
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {

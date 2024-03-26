@@ -18,3 +18,11 @@ final class AuthFailure extends AuthState {
   final String message;
   const AuthFailure(this.message);
 }
+
+class PasswordVisibilityInitial extends AuthState {}
+
+class PasswordVisibilityChanged extends AuthState {
+  final bool isPasswordVisible;
+
+  PasswordVisibilityChanged(this.isPasswordVisible);
+}

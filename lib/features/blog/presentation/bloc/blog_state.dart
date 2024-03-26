@@ -18,3 +18,5 @@ final class BlogDisplaySuccess extends BlogState {
   final List<Blog> blogs;
   BlogDisplaySuccess(this.blogs);
 }
+
+final class BlogDeleteState extends BlogState {}

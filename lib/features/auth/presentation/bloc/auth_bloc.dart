@@ -15,6 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSignIn _userSignIn;
   final CurrentUser _currentUser;
   final AppUserCubit _appUserCubit;
+  bool _isPasswordVisible = false;
 
   AuthBloc({
     required UserSignUp userSignUp,
@@ -30,6 +31,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignUp>(_onAuthSignUp);
     on<AuthSignIn>(_onAuthSignIn);
     on<AuthIsUserLoggedIn>(_isUserLoggedIn);
+    on<TogglePasswordVisibilityEvent>(_togglePasswordVisibility);
+  }
+
+  //-- Password Toggle
+
+   void _togglePasswordVisibility(
+      TogglePasswordVisibilityEvent event, Emitter<AuthState> emit) {
+    _isPasswordVisible = !_isPasswordVisible;
+    // Emit a state to notify UI about the change in password visibility
+    emit(PasswordVisibilityChanged(_isPasswordVisible));
   }
 
   void _isUserLoggedIn(

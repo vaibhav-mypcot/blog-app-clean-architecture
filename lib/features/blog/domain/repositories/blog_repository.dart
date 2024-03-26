@@ -14,4 +14,5 @@ abstract interface class BlogRepository {
   });
 
   Future<Either<Failure, List<Blog>>> getAllBlogs();
+
 }
