@@ -13,6 +13,7 @@ part 'blog_state.dart';
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
   final UploadBlog _uploadBlog;
   final GetAllBlogs _getAllBlogs;
+  List<int> selectedIndices = [];
 
   BlogBloc({
     required UploadBlog uploadBlog,
@@ -23,6 +24,19 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     on<BlogEvent>((event, emit) => emit(BlogLoading()));
     on<BlogUpload>(_onBlogUpload);
     on<BlogFetchAllBlogs>(_onFetchAllBlogs);
+    on<SelectedBlogEvent>(_deleteSelectedBlog);
+  }
+
+  void _deleteSelectedBlog(BlogEvent event, Emitter<BlogState> emit) {
+    if (event is SelectedBlogEvent) {
+      final int index = event.index;
+      if (selectedIndices.contains(index)) {
+        selectedIndices.remove(index);
+      } else {
+        selectedIndices.add(index);
+      }
+      emit(SelectedBlogState(List<int>.from(selectedIndices)));
+    }
   }
 
   void _onBlogUpload(BlogUpload event, Emitter<BlogState> emit) async {

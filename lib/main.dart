@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Blog App',
         themeMode: ThemeMode.system,
         theme: TAppTheme.lightTheme,
+ 
         home: BlocSelector<AppUserCubit, AppUserState, bool>(
           selector: (state) {
             return state is AppUserLoggedIn;

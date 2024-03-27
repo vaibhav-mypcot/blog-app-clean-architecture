@@ -22,3 +22,8 @@ final class BlogUpload extends BlogEvent {
 final class BlogFetchAllBlogs extends BlogEvent {}
 
 final class BlogDeleteEvent extends BlogEvent {}
+
+final class SelectedBlogEvent extends BlogEvent {
+  final int index;
+  SelectedBlogEvent(this.index);
+}

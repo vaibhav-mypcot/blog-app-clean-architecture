@@ -16,7 +16,15 @@ final class BlogUploadSuccess extends BlogState {}
 
 final class BlogDisplaySuccess extends BlogState {
   final List<Blog> blogs;
-  BlogDisplaySuccess(this.blogs);
+  BlogDisplaySuccess(
+    this.blogs
+  
+  );
 }
 
 final class BlogDeleteState extends BlogState {}
+
+final class SelectedBlogState extends BlogState {
+  final List<int> selectedIndices;
+  SelectedBlogState(this.selectedIndices);
+}
