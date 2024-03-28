@@ -66,5 +66,16 @@ class BlogRepositoryImpl implements BlogRepository {
       return left(Failure(e.message));
     }
   }
-  
+
+  //-- Delete blog
+
+  @override
+  Either<Failure, String> deleteBlogs({required Map blogId}) {
+    try {
+      blogRemoteDataSource.deleteBlogs(blogId: blogId);
+      return right('blogs deleted successfully');
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 }

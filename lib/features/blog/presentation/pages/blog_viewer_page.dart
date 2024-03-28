@@ -81,25 +81,6 @@ class BlogViewerPage extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 )
-
-                // Text(
-                //   blog.content.isNotEmpty
-                //       ? blog.content[0]
-                //       : '', // First character
-                //   style: TextStyle(
-                //     fontSize: 16.sp,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
-                // Text(
-                //   blog.content.length > 1
-                //       ? blog.content.substring(1)
-                //       : '', // Rest of the content
-                //   style: TextStyle(
-                //     fontSize: 16.sp,
-                //     fontWeight: FontWeight.w400,
-                //   ),
-                // ),
               ],
             ),
           ),

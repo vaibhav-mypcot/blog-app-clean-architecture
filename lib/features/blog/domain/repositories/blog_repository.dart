@@ -15,4 +15,7 @@ abstract interface class BlogRepository {
 
   Future<Either<Failure, List<Blog>>> getAllBlogs();
 
+  Either<Failure, String> deleteBlogs({
+    required Map blogId,
+  });
 }

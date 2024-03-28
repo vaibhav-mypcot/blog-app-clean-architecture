@@ -25,5 +25,16 @@ final class BlogDeleteEvent extends BlogEvent {}
 
 final class SelectedBlogEvent extends BlogEvent {
   final int index;
-  SelectedBlogEvent(this.index);
+  final String blogId; 
+  SelectedBlogEvent(this.index, this.blogId);
 }
+
+class UnSelectedBlogEvent extends BlogEvent {
+  final int index;
+  final String blogId; 
+  UnSelectedBlogEvent(this.index, this.blogId);
+}
+
+class UnSelectAllBlogs extends BlogEvent {}
+
+class DeleteSelectedBlogEvent extends BlogEvent {}

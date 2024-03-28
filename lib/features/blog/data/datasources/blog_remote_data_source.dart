@@ -14,7 +14,9 @@ abstract interface class BlogRemoteDataSource {
 
   Future<List<BlogModel>> getAllBlogs();
 
-
+  void deleteBlogs({
+    required Map blogId,
+  });
 }
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
@@ -68,4 +70,29 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       throw ServerException(e.toString());
     }
   }
+
+  //-- Delete Blogs
+
+  @override
+  void deleteBlogs({required Map blogId}) async {
+    try {
+      List values = blogId.values.toList();
+      for (var blogIdValue in values) {
+        await supabaseClient.from('blogs').delete().eq('id', blogIdValue);
+      }
+
+      print("blogs deleted from database successfully");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  // @override
+  // void deleteBlogs() {
+  //   try {
+  //     supabaseClient.from('blogs').delete().eq('id', id);
+  //   } catch (e) {
+
+  //   }
+  // }
 }

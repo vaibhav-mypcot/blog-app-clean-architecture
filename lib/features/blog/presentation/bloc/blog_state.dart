@@ -16,9 +16,10 @@ final class BlogUploadSuccess extends BlogState {}
 
 final class BlogDisplaySuccess extends BlogState {
   final List<Blog> blogs;
+  final Map<int, String> selectedIndices;
   BlogDisplaySuccess(
-    this.blogs
-  
+    this.blogs,
+    this.selectedIndices
   );
 }
 

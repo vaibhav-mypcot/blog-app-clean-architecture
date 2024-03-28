@@ -24,76 +24,97 @@ class _BlogPageState extends State<BlogPage> {
     context.read<BlogBloc>().add(BlogFetchAllBlogs());
   }
 
-  List<bool> selectedStates = [];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Blog App'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AddNewBlogPage(),
-                ),
-              );
-            },
-            icon: const Icon(
-              CupertinoIcons.add_circled,
-            ),
-          ),
-        ],
-      ),
-      body: BlocConsumer<BlogBloc, BlogState>(
-        listener: (context, state) {
-          if (state is BlogFailure) {
-            showSnackBar(
-              context,
-              "",
-              "Something went wrong",
-              TColors.failedBackgroundColor,
-              TColors.failedAssetsColor,
-              TImages.failure,
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state is BlogLoading) {
-            return const Loader();
-          }
+    return BlocConsumer<BlogBloc, BlogState>(
+      listener: (context, state) {
+        if (state is BlogFailure) {
+          showSnackBar(
+            context,
+            "",
+            "Something went wrong",
+            TColors.failedBackgroundColor,
+            TColors.failedAssetsColor,
+            TImages.failure,
+          );
+        }
+      },
+      builder: (context, state) {
+        List<int> selectedIndices = state is BlogDisplaySuccess
+            ? (state).selectedIndices.keys.toList()
+            : [];
+        if (state is BlogLoading) {
+          return const Loader();
+        }
 
-          if (state is BlogDisplaySuccess) {
-            return ListView.builder(
+        if (state is BlogDisplaySuccess) {
+          bool isEmptyBox = selectedIndices.length < 1 ? true : false;
+          return Scaffold(
+            appBar: AppBar(
+              title: isEmptyBox ? const Text('Blog App') : null,
+              leading: isEmptyBox
+                  ? null
+                  : IconButton(
+                      onPressed: () {
+                        BlocProvider.of<BlogBloc>(context)
+                            .add(UnSelectAllBlogs());
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+              actions: [
+                SizedBox(
+                  child: isEmptyBox
+                      ? IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AddNewBlogPage(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.add_circled,
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            BlocProvider.of<BlogBloc>(context)
+                                .add(DeleteSelectedBlogEvent());
+                            BlocProvider.of<BlogBloc>(context)
+                                .add(BlogFetchAllBlogs());
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.delete,
+                          ),
+                        ),
+                ),
+              ],
+            ),
+            body: ListView.builder(
               itemCount: state.blogs.length,
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
-                bool isSelected = selectedStates.length > index
-                    ? selectedStates[index]
-                    : false;
                 return Container(
-                  color: Colors.grey.withOpacity(0.2),
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.h, vertical: 8.w),
                   child: GestureDetector(
-                      onLongPress: () {
-                        setState(() {
-                          if (selectedStates.length <= index) {
-                            selectedStates.add(true);
-                          } else {
-                            selectedStates[index] = true;
-                          }
-                        });
-                      },
-                      child: BlogCart(blog: blog)),
+                    onLongPress: () {},
+                    onTap: () {},
+                    child: BlogCart(
+                      blog: blog,
+                      index: index,
+                      selectedIndices: selectedIndices,
+                    ),
+                  ),
                 );
               },
-            );
-          }
-          return SizedBox();
-        },
-      ),
+            ),
+          );
+        }
+        return Container(
+          color: Colors.amber,
+        );
+      },
     );
   }
 }
