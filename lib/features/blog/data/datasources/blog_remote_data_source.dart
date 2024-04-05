@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/features/blog/data/model/blog_model.dart';
-import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class BlogRemoteDataSource {
@@ -57,7 +56,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       final blogs =
           await supabaseClient.from('blogs').select('*, profiles (name)');
       blogs.map((e) => BlogModel.fromJson(e)).forEach((blog) {
-        print('Title: ${blog.title}');
+        print('Title: ${blog}');
       });
       return blogs
           .map(
@@ -91,6 +90,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   // void deleteBlogs() {
   //   try {
   //     supabaseClient.from('blogs').delete().eq('id', id);
+  
   //   } catch (e) {
 
   //   }

@@ -8,7 +8,7 @@ class DeleteBlogs implements UseCase<String, DeleteBlogsParams>{
   DeleteBlogs(this.blogRepository);
   @override
   Future<Either<Failure, String>> call(DeleteBlogsParams params) async{
-   return await blogRepository.deleteBlogs(blogId: params.deleteBlogsId);
+   return  blogRepository.deleteBlogs(blogId: params.deleteBlogsId);
  
   } 
 }

@@ -22,8 +22,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final SupabaseClient supabaseClient;
   AuthRemoteDataSourceImpl(this.supabaseClient);
 
-  @override
-  // TODO: implement currentUserSession
+  @override 
   Session? get currentUserSession => supabaseClient.auth.currentSession;
 
   @override

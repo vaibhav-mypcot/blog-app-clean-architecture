@@ -5,6 +5,7 @@ import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:blog_app/features/blog/domain/usecases/delete_blogs.dart';
 import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ part 'blog_state.dart';
 
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
   final UploadBlog _uploadBlog;
-  final GetAllBlogs _getAllBlogs;
+  final GetAllBlogsUseCase _getAllBlogs;
   final DeleteBlogs _deleteBlogs;
   // List<Map<int, String>> selectedIndices = [];
   // List<int> selectedIndices = [];
@@ -21,7 +22,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
   BlogBloc({
     required UploadBlog uploadBlog,
-    required GetAllBlogs getAllBlogs,
+    required GetAllBlogsUseCase getAllBlogs,
     required DeleteBlogs deleteBlogs,
   })  : _uploadBlog = uploadBlog,
         _getAllBlogs = getAllBlogs,
@@ -39,7 +40,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
       final int index = event.index;
       final String blogId = event.blogId;
 
-      // Map<int, String> indexBlogIdMap = {index: blogId};
 
       if (selectedIndices.containsKey(index)) {
         selectedIndices.remove(index);

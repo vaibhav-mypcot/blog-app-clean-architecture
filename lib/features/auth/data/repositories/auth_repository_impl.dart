@@ -47,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    return _getUser(
+    return getUser(
       () async => await remoteDataSource.signInWithEmailPassword(
         email: email,
         password: password,
@@ -61,7 +61,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    return _getUser(
+    return getUser(
       () async => await remoteDataSource.signUpWithEmailPassword(
         name: name,
         email: email,
@@ -70,7 +70,7 @@ class AuthRepositoryImpl implements AuthRepository {
     );
   }
 
-  Future<Either<Failure, User>> _getUser(Future<User> Function() fn) async {
+  Future<Either<Failure, User>> getUser(Future<User> Function() fn) async {
     try {
       if (!await (connectionChecker.isConnected)) {
         return left(

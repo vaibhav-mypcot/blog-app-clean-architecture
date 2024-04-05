@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class Blog {
+import 'package:equatable/equatable.dart';
+
+class Blog extends Equatable {
   final String id;
   final String posterId;
   final String title;
@@ -21,4 +23,16 @@ class Blog {
     required this.updatedAt,
     this.posterName,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        posterId,
+        title,
+        content,
+        imageUrl,
+        topics,
+        updatedAt,
+        posterName,
+      ];
 }

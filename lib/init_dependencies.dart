@@ -133,7 +133,7 @@ void _initBlog() {
       ),
     )
     ..registerFactory(
-      () => GetAllBlogs(
+      () => GetAllBlogsUseCase(
         serviceLocator(),
       ),
     )

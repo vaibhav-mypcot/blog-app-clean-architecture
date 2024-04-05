@@ -48,7 +48,7 @@ class _BlogPageState extends State<BlogPage> {
         }
 
         if (state is BlogDisplaySuccess) {
-          bool isEmptyBox = selectedIndices.length < 1 ? true : false;
+          bool isEmptyBox = selectedIndices.isEmpty ? true : false;
           return Scaffold(
             appBar: AppBar(
               title: isEmptyBox ? const Text('Blog App') : null,
@@ -68,8 +68,8 @@ class _BlogPageState extends State<BlogPage> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => AddNewBlogPage(),
-                              ),
+                                builder: (context) => const AddNewBlogPage(),
+                              )
                             );
                           },
                           icon: const Icon(

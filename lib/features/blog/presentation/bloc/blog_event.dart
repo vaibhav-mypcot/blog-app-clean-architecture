@@ -1,7 +1,7 @@
 part of 'blog_bloc.dart';
 
 @immutable
-sealed class BlogEvent {}
+sealed class BlogEvent extends Equatable{}
 
 final class BlogUpload extends BlogEvent {
   final String posterId;
@@ -17,24 +17,52 @@ final class BlogUpload extends BlogEvent {
     required this.image,
     required this.topics,
   });
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }
 
-final class BlogFetchAllBlogs extends BlogEvent {}
+final class BlogFetchAllBlogs extends BlogEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-final class BlogDeleteEvent extends BlogEvent {}
+final class BlogDeleteEvent extends BlogEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
 final class SelectedBlogEvent extends BlogEvent {
   final int index;
   final String blogId; 
   SelectedBlogEvent(this.index, this.blogId);
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class UnSelectedBlogEvent extends BlogEvent {
   final int index;
   final String blogId; 
   UnSelectedBlogEvent(this.index, this.blogId);
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }
 
-class UnSelectAllBlogs extends BlogEvent {}
+class UnSelectAllBlogs extends BlogEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class DeleteSelectedBlogEvent extends BlogEvent {}
+class DeleteSelectedBlogEvent extends BlogEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
