@@ -90,7 +90,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   // void deleteBlogs() {
   //   try {
   //     supabaseClient.from('blogs').delete().eq('id', id);
-  
+
   //   } catch (e) {
 
   //   }

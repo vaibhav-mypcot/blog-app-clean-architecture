@@ -9,6 +9,7 @@ import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart';
 import 'package:mockito/annotations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:http/http.dart' as http;
 
 // customMocks: [MockSpec<SupabaseClient>(as: #MockSupabaseClient)],
 @GenerateMocks(
@@ -26,7 +27,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
     GetAllBlogsUseCase,
     UploadBlog,
     DeleteBlogs,
-  
   ],
+  customMocks: [MockSpec<http.Client>(as: #MockHttpClient)],
 )
 void main() {}

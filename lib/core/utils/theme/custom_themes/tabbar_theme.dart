@@ -1,7 +1,6 @@
 import 'package:blog_app/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-
 class TTabBarTheme {
   // -- Light Theme
   static TabBarTheme lightTabBarTheme = const TabBarTheme(

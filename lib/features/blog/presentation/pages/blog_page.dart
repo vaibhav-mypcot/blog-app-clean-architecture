@@ -66,11 +66,9 @@ class _BlogPageState extends State<BlogPage> {
                   child: isEmptyBox
                       ? IconButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const AddNewBlogPage(),
-                              )
-                            );
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const AddNewBlogPage(),
+                            ));
                           },
                           icon: const Icon(
                             CupertinoIcons.add_circled,

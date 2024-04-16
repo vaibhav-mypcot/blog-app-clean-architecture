@@ -1,7 +1,7 @@
 part of 'blog_bloc.dart';
 
 @immutable
-sealed class BlogEvent extends Equatable{}
+sealed class BlogEvent extends Equatable {}
 
 final class BlogUpload extends BlogEvent {
   final String posterId;
@@ -17,7 +17,7 @@ final class BlogUpload extends BlogEvent {
     required this.image,
     required this.topics,
   });
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
@@ -37,9 +37,9 @@ final class BlogDeleteEvent extends BlogEvent {
 
 final class SelectedBlogEvent extends BlogEvent {
   final int index;
-  final String blogId; 
+  final String blogId;
   SelectedBlogEvent(this.index, this.blogId);
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
@@ -47,9 +47,9 @@ final class SelectedBlogEvent extends BlogEvent {
 
 class UnSelectedBlogEvent extends BlogEvent {
   final int index;
-  final String blogId; 
+  final String blogId;
   UnSelectedBlogEvent(this.index, this.blogId);
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();

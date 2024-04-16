@@ -4,28 +4,31 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:io' as _i9;
+import 'dart:convert' as _i19;
+import 'dart:io' as _i10;
+import 'dart:typed_data' as _i20;
 
-import 'package:blog_app/core/error/failure.dart' as _i7;
-import 'package:blog_app/core/network/connection_checker.dart' as _i13;
-import 'package:blog_app/core/usecase/usecase.dart' as _i14;
+import 'package:blog_app/core/error/failure.dart' as _i8;
+import 'package:blog_app/core/network/connection_checker.dart' as _i14;
+import 'package:blog_app/core/usecase/usecase.dart' as _i15;
 import 'package:blog_app/features/blog/data/datasources/blog_local_data_source.dart'
-    as _i12;
+    as _i13;
 import 'package:blog_app/features/blog/data/datasources/blog_remote_data_source.dart'
-    as _i11;
+    as _i12;
 import 'package:blog_app/features/blog/data/model/blog_model.dart' as _i2;
-import 'package:blog_app/features/blog/domain/entities/blog.dart' as _i8;
+import 'package:blog_app/features/blog/domain/entities/blog.dart' as _i9;
 import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart'
     as _i5;
 import 'package:blog_app/features/blog/domain/usecases/delete_blogs.dart'
-    as _i17;
+    as _i18;
 import 'package:blog_app/features/blog/domain/usecases/get_all_blogs.dart'
-    as _i15;
-import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart'
     as _i16;
-import 'package:fpdart/fpdart.dart' as _i6;
+import 'package:blog_app/features/blog/domain/usecases/upload_blog.dart'
+    as _i17;
+import 'package:fpdart/fpdart.dart' as _i7;
+import 'package:http/http.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i11;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -213,6 +216,27 @@ class _FakeBlogRepository_15 extends _i1.SmartFake
         );
 }
 
+class _FakeResponse_16 extends _i1.SmartFake implements _i6.Response {
+  _FakeResponse_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamedResponse_17 extends _i1.SmartFake
+    implements _i6.StreamedResponse {
+  _FakeStreamedResponse_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [BlogRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -222,8 +246,8 @@ class MockBlogRepository extends _i1.Mock implements _i5.BlogRepository {
   }
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>> uploadBlog({
-    required _i9.File? image,
+  _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>> uploadBlog({
+    required _i10.File? image,
     required String? title,
     required String? content,
     required String? posterId,
@@ -241,8 +265,8 @@ class MockBlogRepository extends _i1.Mock implements _i5.BlogRepository {
             #topics: topics,
           },
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, _i8.Blog>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, _i9.Blog>>(
           this,
           Invocation.method(
             #uploadBlog,
@@ -256,27 +280,27 @@ class MockBlogRepository extends _i1.Mock implements _i5.BlogRepository {
             },
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>>);
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>> getAllBlogs() =>
+  _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>> getAllBlogs() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllBlogs,
           [],
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, List<_i8.Blog>>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, List<_i9.Blog>>>(
           this,
           Invocation.method(
             #getAllBlogs,
             [],
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>>);
 
   @override
-  _i6.Either<_i7.Failure, String> deleteBlogs(
+  _i7.Either<_i8.Failure, String> deleteBlogs(
           {required Map<dynamic, dynamic>? blogId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -284,7 +308,7 @@ class MockBlogRepository extends _i1.Mock implements _i5.BlogRepository {
           [],
           {#blogId: blogId},
         ),
-        returnValue: _i10.dummyValue<_i6.Either<_i7.Failure, String>>(
+        returnValue: _i11.dummyValue<_i7.Either<_i8.Failure, String>>(
           this,
           Invocation.method(
             #deleteBlogs,
@@ -292,14 +316,14 @@ class MockBlogRepository extends _i1.Mock implements _i5.BlogRepository {
             {#blogId: blogId},
           ),
         ),
-      ) as _i6.Either<_i7.Failure, String>);
+      ) as _i7.Either<_i8.Failure, String>);
 }
 
 /// A class which mocks [BlogRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBlogRemoteDataSource extends _i1.Mock
-    implements _i11.BlogRemoteDataSource {
+    implements _i12.BlogRemoteDataSource {
   MockBlogRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -322,7 +346,7 @@ class MockBlogRemoteDataSource extends _i1.Mock
 
   @override
   _i4.Future<String> uploadBlogImage({
-    required _i9.File? image,
+    required _i10.File? image,
     required _i2.BlogModel? blog,
   }) =>
       (super.noSuchMethod(
@@ -334,7 +358,7 @@ class MockBlogRemoteDataSource extends _i1.Mock
             #blog: blog,
           },
         ),
-        returnValue: _i4.Future<String>.value(_i10.dummyValue<String>(
+        returnValue: _i4.Future<String>.value(_i11.dummyValue<String>(
           this,
           Invocation.method(
             #uploadBlogImage,
@@ -372,7 +396,7 @@ class MockBlogRemoteDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBlogLocalDataSource extends _i1.Mock
-    implements _i12.BlogLocalDataSource {
+    implements _i13.BlogLocalDataSource {
   MockBlogLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -401,7 +425,7 @@ class MockBlogLocalDataSource extends _i1.Mock
 /// A class which mocks [ConnectionChecker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConnectionChecker extends _i1.Mock implements _i13.ConnectionChecker {
+class MockConnectionChecker extends _i1.Mock implements _i14.ConnectionChecker {
   MockConnectionChecker() {
     _i1.throwOnMissingStub(this);
   }
@@ -417,27 +441,27 @@ class MockConnectionChecker extends _i1.Mock implements _i13.ConnectionChecker {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUseCase<SuccessType, Params> extends _i1.Mock
-    implements _i14.UseCase<SuccessType, Params> {
+    implements _i15.UseCase<SuccessType, Params> {
   MockUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, SuccessType>> call(Params? params) =>
+  _i4.Future<_i7.Either<_i8.Failure, SuccessType>> call(Params? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, SuccessType>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, SuccessType>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, SuccessType>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, SuccessType>>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, SuccessType>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, SuccessType>>);
 }
 
 /// A class which mocks [SupabaseClient].
@@ -641,7 +665,7 @@ class MockSupabaseClient extends _i1.Mock implements _i3.SupabaseClient {
           #removeChannel,
           [channel],
         ),
-        returnValue: _i4.Future<String>.value(_i10.dummyValue<String>(
+        returnValue: _i4.Future<String>.value(_i11.dummyValue<String>(
           this,
           Invocation.method(
             #removeChannel,
@@ -1695,8 +1719,8 @@ class MockPostgrestFilterBuilder<T> extends _i1.Mock
           [onError],
           {#test: test},
         ),
-        returnValue: _i10.ifNotNull(
-              _i10.dummyValueOrNull<T>(
+        returnValue: _i11.ifNotNull(
+              _i11.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #catchError,
@@ -1727,8 +1751,8 @@ class MockPostgrestFilterBuilder<T> extends _i1.Mock
           [onValue],
           {#onError: onError},
         ),
-        returnValue: _i10.ifNotNull(
-              _i10.dummyValueOrNull<U>(
+        returnValue: _i11.ifNotNull(
+              _i11.dummyValueOrNull<U>(
                 this,
                 Invocation.method(
                   #then,
@@ -1759,8 +1783,8 @@ class MockPostgrestFilterBuilder<T> extends _i1.Mock
           [timeLimit],
           {#onTimeout: onTimeout},
         ),
-        returnValue: _i10.ifNotNull(
-              _i10.dummyValueOrNull<T>(
+        returnValue: _i11.ifNotNull(
+              _i11.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #timeout,
@@ -1787,8 +1811,8 @@ class MockPostgrestFilterBuilder<T> extends _i1.Mock
           #whenComplete,
           [action],
         ),
-        returnValue: _i10.ifNotNull(
-              _i10.dummyValueOrNull<T>(
+        returnValue: _i11.ifNotNull(
+              _i11.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #whenComplete,
@@ -1811,7 +1835,7 @@ class MockPostgrestFilterBuilder<T> extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetAllBlogsUseCase extends _i1.Mock
-    implements _i15.GetAllBlogsUseCase {
+    implements _i16.GetAllBlogsUseCase {
   MockGetAllBlogsUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -1826,28 +1850,28 @@ class MockGetAllBlogsUseCase extends _i1.Mock
       ) as _i5.BlogRepository);
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>> call(
-          _i14.NoParams? params) =>
+  _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>> call(
+          _i15.NoParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, List<_i8.Blog>>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, List<_i9.Blog>>>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, List<_i8.Blog>>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, List<_i9.Blog>>>);
 }
 
 /// A class which mocks [UploadBlog].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUploadBlog extends _i1.Mock implements _i16.UploadBlog {
+class MockUploadBlog extends _i1.Mock implements _i17.UploadBlog {
   MockUploadBlog() {
     _i1.throwOnMissingStub(this);
   }
@@ -1862,28 +1886,28 @@ class MockUploadBlog extends _i1.Mock implements _i16.UploadBlog {
       ) as _i5.BlogRepository);
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>> call(
-          _i16.UploadBlogParams? params) =>
+  _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>> call(
+          _i17.UploadBlogParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, _i8.Blog>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, _i9.Blog>>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, _i8.Blog>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, _i9.Blog>>);
 }
 
 /// A class which mocks [DeleteBlogs].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDeleteBlogs extends _i1.Mock implements _i17.DeleteBlogs {
+class MockDeleteBlogs extends _i1.Mock implements _i18.DeleteBlogs {
   MockDeleteBlogs() {
     _i1.throwOnMissingStub(this);
   }
@@ -1898,20 +1922,256 @@ class MockDeleteBlogs extends _i1.Mock implements _i17.DeleteBlogs {
       ) as _i5.BlogRepository);
 
   @override
-  _i4.Future<_i6.Either<_i7.Failure, String>> call(
-          _i17.DeleteBlogsParams? params) =>
+  _i4.Future<_i7.Either<_i8.Failure, String>> call(
+          _i18.DeleteBlogsParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i4.Future<_i6.Either<_i7.Failure, String>>.value(
-            _i10.dummyValue<_i6.Either<_i7.Failure, String>>(
+        returnValue: _i4.Future<_i7.Either<_i8.Failure, String>>.value(
+            _i11.dummyValue<_i7.Either<_i8.Failure, String>>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i4.Future<_i6.Either<_i7.Failure, String>>);
+      ) as _i4.Future<_i7.Either<_i8.Failure, String>>);
+}
+
+/// A class which mocks [Client].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHttpClient extends _i1.Mock implements _i6.Client {
+  MockHttpClient() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i6.Response> head(
+    Uri? url, {
+    Map<String, String>? headers,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #head,
+          [url],
+          {#headers: headers},
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #head,
+            [url],
+            {#headers: headers},
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<_i6.Response> get(
+    Uri? url, {
+    Map<String, String>? headers,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [url],
+          {#headers: headers},
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #get,
+            [url],
+            {#headers: headers},
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<_i6.Response> post(
+    Uri? url, {
+    Map<String, String>? headers,
+    Object? body,
+    _i19.Encoding? encoding,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #post,
+          [url],
+          {
+            #headers: headers,
+            #body: body,
+            #encoding: encoding,
+          },
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #post,
+            [url],
+            {
+              #headers: headers,
+              #body: body,
+              #encoding: encoding,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<_i6.Response> put(
+    Uri? url, {
+    Map<String, String>? headers,
+    Object? body,
+    _i19.Encoding? encoding,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #put,
+          [url],
+          {
+            #headers: headers,
+            #body: body,
+            #encoding: encoding,
+          },
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #put,
+            [url],
+            {
+              #headers: headers,
+              #body: body,
+              #encoding: encoding,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<_i6.Response> patch(
+    Uri? url, {
+    Map<String, String>? headers,
+    Object? body,
+    _i19.Encoding? encoding,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #patch,
+          [url],
+          {
+            #headers: headers,
+            #body: body,
+            #encoding: encoding,
+          },
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #patch,
+            [url],
+            {
+              #headers: headers,
+              #body: body,
+              #encoding: encoding,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<_i6.Response> delete(
+    Uri? url, {
+    Map<String, String>? headers,
+    Object? body,
+    _i19.Encoding? encoding,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [url],
+          {
+            #headers: headers,
+            #body: body,
+            #encoding: encoding,
+          },
+        ),
+        returnValue: _i4.Future<_i6.Response>.value(_FakeResponse_16(
+          this,
+          Invocation.method(
+            #delete,
+            [url],
+            {
+              #headers: headers,
+              #body: body,
+              #encoding: encoding,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i6.Response>);
+
+  @override
+  _i4.Future<String> read(
+    Uri? url, {
+    Map<String, String>? headers,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #read,
+          [url],
+          {#headers: headers},
+        ),
+        returnValue: _i4.Future<String>.value(_i11.dummyValue<String>(
+          this,
+          Invocation.method(
+            #read,
+            [url],
+            {#headers: headers},
+          ),
+        )),
+      ) as _i4.Future<String>);
+
+  @override
+  _i4.Future<_i20.Uint8List> readBytes(
+    Uri? url, {
+    Map<String, String>? headers,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readBytes,
+          [url],
+          {#headers: headers},
+        ),
+        returnValue: _i4.Future<_i20.Uint8List>.value(_i20.Uint8List(0)),
+      ) as _i4.Future<_i20.Uint8List>);
+
+  @override
+  _i4.Future<_i6.StreamedResponse> send(_i6.BaseRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #send,
+          [request],
+        ),
+        returnValue:
+            _i4.Future<_i6.StreamedResponse>.value(_FakeStreamedResponse_17(
+          this,
+          Invocation.method(
+            #send,
+            [request],
+          ),
+        )),
+      ) as _i4.Future<_i6.StreamedResponse>);
+
+  @override
+  void close() => super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

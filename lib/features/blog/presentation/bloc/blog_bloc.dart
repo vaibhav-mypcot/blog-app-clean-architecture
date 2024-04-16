@@ -40,7 +40,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
       final int index = event.index;
       final String blogId = event.blogId;
 
-
       if (selectedIndices.containsKey(index)) {
         selectedIndices.remove(index);
       } else {

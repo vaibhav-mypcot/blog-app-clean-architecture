@@ -3,7 +3,8 @@ import 'package:blog_app/features/auth/data/models/user_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../generative_mocks/helper.mocks.dart';
+import '../../../blog/helper/test_helper.mocks.dart';
+
 
 void main() {
   late MockSupabaseClient mockSupabaseClient;

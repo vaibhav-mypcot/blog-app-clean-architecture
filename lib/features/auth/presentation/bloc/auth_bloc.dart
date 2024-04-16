@@ -36,7 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   //-- Password Toggle
 
-   void _togglePasswordVisibility(
+  void _togglePasswordVisibility(
       TogglePasswordVisibilityEvent event, Emitter<AuthState> emit) {
     _isPasswordVisible = !_isPasswordVisible;
     // Emit a state to notify UI about the change in password visibility

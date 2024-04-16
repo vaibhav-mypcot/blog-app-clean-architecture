@@ -6,7 +6,6 @@ Future<File?> pickImage() async {
   try {
     final XFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-
     );
     if (XFile != null) {
       return File(XFile.path);
